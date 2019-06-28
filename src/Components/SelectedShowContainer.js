@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import Episode from './Components/Episode';
+import Episode from './Episode';
+
+Array.prototype.unique = function() {
+  let arr = [];
+  for(let i = 0; i < this.length; i++) {
+    if(!arr.includes(this[i]))
+      arr.push(this[i]);
+  }
+  return arr;
+}
 
 class SelectedShowContainer extends Component {
 
@@ -18,10 +27,9 @@ class SelectedShowContainer extends Component {
   }
 
   mapEpisodes = () => {
-    return this.props.episodes.map((e)=>{
-      if (e.season == this.state.selectedSeason){
-        return (<Episode eachEpisode={e} key={e.id}/>)
-      }
+    return this.props.episodes.map(ep => {
+      if (ep.season == this.state.selectedSeason)
+        return <Episode episode={ep} key={ep.id}/>
     })
   }
 
@@ -51,15 +59,4 @@ class SelectedShowContainer extends Component {
 
 }
 
-export SelectedShowContainer;
-
-
-Array.prototype.unique = function() {
-  var arr = [];
-  for(var i = 0; i < this.length; i++) {
-    if(!arr.includes(this[i])) {
-        arr.push(this[i]);
-    }
-  }
-  return arr;
-}
+export default SelectedShowContainer;
